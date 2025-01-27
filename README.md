@@ -1,6 +1,29 @@
 # NFC library
 
-This is an library for PN532 to use NFC technology.
+This is a library for PN532 to use NFC technology with the ESP32 specifically using the UART protocol. It uses the modifications/workaround recommended by [OttoEs](https://esp32.com/viewtopic.php?t=4738#p71624)
+
+The modifications were made to the PN532_HSU.cpp
+```
+void PN532_HSU::begin()
+{
+#ifdef PN532_HSU_USE_CUSTOM_PINS
+    _serial->begin(115200, SERIAL_8N1, PN532_HSU_RX_PIN, PN532_HSU_TX_PIN); // Use custom pins 16 (RX) and 17 (TX)
+#else
+    _serial->begin(115200); // Use default UART pins
+#endif
+}
+```
+
+To use this define the pins
+```
+#define PN532_HSU_USE_CUSTOM_PINS
+#define PN532_HSU_RX_PIN 16
+#define PN532_HSU_TX_PIN 17
+
+```
+
+If you do not need UART for the ESP32 with the PN532, Use the OG library...
+
 It is for [NFC Shield](https://www.seeedstudio.com/NFC-Shield-V2-0.html) and [Grove - NFC](https://www.seeedstudio.com/Grove-NFC.html).
 
 [![NFC Shield](https://statics3.seeedstudio.com/images/113030001%201.jpg)](https://www.seeedstudio.com/NFC-Shield-V2-0.html)

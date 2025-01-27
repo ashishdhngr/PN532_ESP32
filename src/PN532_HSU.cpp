@@ -9,9 +9,14 @@ PN532_HSU::PN532_HSU(HardwareSerial &serial)
     command = 0;
 }
 
+// void PN532_HSU::begin() { _serial->begin(115200, SERIAL_8N1, 16, 17); }
 void PN532_HSU::begin()
 {
-    _serial->begin(115200);
+#ifdef PN532_HSU_USE_CUSTOM_PINS
+    _serial->begin(115200, SERIAL_8N1, PN532_HSU_RX_PIN, PN532_HSU_TX_PIN); // Use custom pins 16 (RX) and 17 (TX)
+#else
+    _serial->begin(115200); // Use default UART pins
+#endif
 }
 
 void PN532_HSU::wakeup()
