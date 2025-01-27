@@ -14,11 +14,20 @@ void PN532_HSU::begin()
 }
 ```
 
-To use this define the pins
+Use by defining the pins
 ```
 #define PN532_HSU_USE_CUSTOM_PINS
-#define PN532_HSU_RX_PIN 16
-#define PN532_HSU_TX_PIN 17
+#define PN532_HSU_RX_PIN 4
+#define PN532_HSU_TX_PIN 21
+
+#define NFC_INTERFACE_HSU
+#include <PN532.h>
+#include <PN532_HSU.cpp>
+#include <PN532_HSU.h>
+
+PN532_HSU pn532hsu(Serial1);
+PN532 nfc(pn532hsu);
+
 
 ```
 
