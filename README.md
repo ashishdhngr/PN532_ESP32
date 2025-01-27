@@ -28,6 +28,11 @@ Use by defining the pins
 PN532_HSU pn532hsu(Serial1);
 PN532 nfc(pn532hsu);
 
+```
+
+Monitor at 115200. Use in platform.ini to automatically select 115200 as baud rate when using vscode serial monitor
+```
+monitor_speed = 115200
 
 ```
 
